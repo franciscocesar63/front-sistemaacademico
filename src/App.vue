@@ -1,10 +1,49 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div>
+      <b-navbar type="dark" variant="dark">
+        <b-navbar-nav>
+            <img src="./assets/logo.png" alt="Sistema acadêmico" style="margin-left:10px" width="3%">
+          <b-nav-item to="/">Início </b-nav-item>
+          <b-nav-item to="/about">Sobre</b-nav-item>
+
+          <!-- Navbar dropdowns -->
+          <b-nav-item-dropdown text="Cadastrar" right>
+            <b-dropdown-item to="/cadastrarCursos">Cursos</b-dropdown-item>
+            <b-dropdown-item href="#">Diretores</b-dropdown-item>
+            <b-dropdown-item href="#">Coordenadores</b-dropdown-item>
+            <b-dropdown-item href="#">Vestibulares</b-dropdown-item>
+            <b-dropdown-item href="#">Disciplinas</b-dropdown-item>
+            <b-dropdown-item href="#">Professores</b-dropdown-item>
+            <b-dropdown-item href="#">Turmas</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="Associações" right>
+            <b-dropdown-item href="#">Curso X Disciplinas</b-dropdown-item>
+            <b-dropdown-item href="#">Professor X Cursos</b-dropdown-item>
+            <b-dropdown-item href="#">Professor X Disciplinas</b-dropdown-item>
+            <b-dropdown-item href="#">Aluno X Turma</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="Visualizar" right>
+            <b-dropdown-item href="#">Cursos</b-dropdown-item>
+            <b-dropdown-item href="#">Diretores</b-dropdown-item>
+            <b-dropdown-item href="#">Coordenadores</b-dropdown-item>
+            <b-dropdown-item href="#">Vestibulares</b-dropdown-item>
+            <b-dropdown-item href="#">Disciplinas</b-dropdown-item>
+            <b-dropdown-item href="#">Professores</b-dropdown-item>
+            <b-dropdown-item href="#">Turmas</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="Notas" right>
+            <b-dropdown-item href="#">Lançar Notas</b-dropdown-item>
+            <b-dropdown-item href="#">Visualizar Notas</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-navbar>
     </div>
-    <router-view/>
+
+    <router-view />
   </div>
 </template>
 
