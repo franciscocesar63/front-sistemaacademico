@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
-import CadastrarCursos from '../views/CadastrarCursos.vue';
+import Login from '../views/Login.vue';
+import Cadastros from '../views/Cadastros.vue';
 
 Vue.use(VueRouter)
 
@@ -18,9 +19,15 @@ const routes: Array<RouteConfig> = [
     component: About
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
     path: '/cadastrarCursos',
-    name: 'Cadastrar Cursos',
-    component: CadastrarCursos
+    alias: ['/cadastrarDiretores', '/testando2'],
+    name: 'Cadastro',
+    component: Cadastros
   }
 ]
 
