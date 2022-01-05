@@ -1,27 +1,18 @@
 <template>
   <div class="container">
-    <h1 class="mb-3 mt-4">Cadastrar Diretor</h1>
+    <h1 class="mb-3 mt-4">Cadastrar Coordenador</h1>
 
     <div>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-card bg-variant="light">
           <b-form-group
-            label-cols-lg="3"
-            label="Dados Pessoais do Diretor"
+            label-cols-lg="4"
+            label="Dados Pessoais do Coordenador"
             label-size="lg"
             label-class="font-weight-bold pt-0"
             class="mb-0"
             label-align="left"
           >
-            <b-form-group
-              label="Titulação:"
-              label-for="nested-street"
-              label-cols-sm="3"
-              label-align-sm="right"
-              label-align="left"
-            >
-              <b-form-input v-model="form.titulacao" id="nested-street"></b-form-input>
-            </b-form-group>
             <b-form-group
               label="Nome:"
               label-for="nested-street"
@@ -91,8 +82,8 @@
 
         <b-card bg-variant="light" class="mt-3">
           <b-form-group
-            label-cols-lg="3"
-            label="Dados do endereço do Diretor"
+            label-cols-lg="4"
+            label="Dados do endereço do Coordenador"
             label-size="lg"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -169,11 +160,11 @@
 <script>
 import axios from "axios";
 import VueCookies from "vue-cookies";
+import router from '@/router';
 export default {
   data() {
     return {
       form: {
-        titulacao: "",
         pessoa: {
           nome: "",
           cpf: "",
@@ -200,9 +191,9 @@ export default {
     onSubmit(event) {
       //adicionando telefone à lista.
       this.form.pessoa.telefones.push({ numero: this.numeroTelefone });
-      
+
       var token = VueCookies.get("token");
-      var url = "http://localhost:8090/api/cadastrarDiretor/";
+      var url = "http://localhost:8090/api/cadastrarCoordenador/";
 
       axios
         .post(url, this.form, {
@@ -211,6 +202,7 @@ export default {
         .then(function (response) {
           console.log(response.status);
           if (response.status == 200) {
+            router.go(0);
             alert("Cadastrado com Sucesso");
           } else {
             alert(
@@ -230,7 +222,6 @@ export default {
       event.preventDefault();
       // Reset our form values
       (this.form = {
-        titulacao: "",
         pessoa: {
           nome: "",
           cpf: "",

@@ -30,6 +30,7 @@
 <script>
 import axios from "axios";
 import VueCookies from "vue-cookies";
+import router from "@/router";
 export default {
   data() {
     return {
@@ -50,10 +51,35 @@ export default {
           var token = response.data.tipo + " " + response.data.token;
           console.log(token);
           if (response.status == 200) {
-            alert("Login realizado com sucesso!");
-
             VueCookies.set("logado", "true");
             VueCookies.set("token", token);
+            VueCookies.set("refresh", "false");
+            //dados do usuário que acabou de logar
+            var urlUsuario = "http://localhost:8090/api/usuario/";
+            axios
+              .post(
+                urlUsuario,
+                { token: token },
+                {
+                  headers: {
+                    Authorization: token,
+                  },
+                }
+              )
+              .then(function (response) {
+                var perfil = response.data.perfis[0].nome;
+                if (perfil != null) {
+                  VueCookies.set("perfil", perfil);
+                } else {
+                  VueCookies.set("perfil", "USER");
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+            //redirecionamento
+            alert("Login realizado com sucesso!");
+            router.push("/");
           } else {
             alert(
               "Ocorreu um erro ao autenticar, tente novamente.\n Erro: " + response.status
@@ -79,6 +105,12 @@ export default {
         this.show = true;
       });
     },
+  },
+  beforeMount() {
+    if (VueCookies.get("refresh") == "false") {
+      router.go();
+      VueCookies.set("refresh", "true");
+    }
   },
 };
 </script>

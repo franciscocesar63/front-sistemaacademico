@@ -13,43 +13,43 @@
           <b-nav-item to="/about">Sobre</b-nav-item>
 
           <!-- Navbar dropdowns -->
-          <b-nav-item-dropdown text="Cadastrar" right>
-            <b-dropdown-item to="/cadastrarCursos">Cursos</b-dropdown-item>
-            <b-dropdown-item to="/cadastrarDiretores">Diretores</b-dropdown-item>
-            <b-dropdown-item href="#">Coordenadores</b-dropdown-item>
+          <b-nav-item-dropdown v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'"  text="Cadastrar" right>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR'" to="/cadastrarCursos">Cursos</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN'" to="/cadastrarDiretores">Diretores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR'" to="/cadastrarCoordenadores">Coordenadores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR'" href="#">Vestibulares</b-dropdown-item>
+            <b-dropdown-item  v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Disciplinas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN'  || this.perfil=='COORDENADOR'" to="/cadastrarProfessores">Professores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Turmas</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" text="Associações" right>
+            <b-dropdown-item v-if="this.perfil=='ADMIN'  || this.perfil=='COORDENADOR'" href="#">Curso X Disciplinas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Professor X Cursos</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Professor X Disciplinas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Aluno X Turma</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown  text="Visualizar" right>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Cursos</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Diretores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Coordenadores</b-dropdown-item>
             <b-dropdown-item href="#">Vestibulares</b-dropdown-item>
-            <b-dropdown-item href="#">Disciplinas</b-dropdown-item>
-            <b-dropdown-item href="#">Professores</b-dropdown-item>
-            <b-dropdown-item href="#">Turmas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR' || this.perfil=='PROFESSOR'" href="#">Disciplinas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Professores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR' || this.perfil=='PROFESSOR'" href="#">Turmas</b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown text="Associações" right>
-            <b-dropdown-item href="#">Curso X Disciplinas</b-dropdown-item>
-            <b-dropdown-item href="#">Professor X Cursos</b-dropdown-item>
-            <b-dropdown-item href="#">Professor X Disciplinas</b-dropdown-item>
-            <b-dropdown-item href="#">Aluno X Turma</b-dropdown-item>
+          <b-nav-item-dropdown v-if="this.perfil=='ADMIN' || this.perfil=='PROFESSOR' || this.perfil=='ALUNO'" text="Notas" right>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='PROFESSOR'" href="#">Lançar Notas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='PROFESSOR' || this.perfil=='ALUNO'" href="#">Visualizar Notas</b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown text="Visualizar" right>
-            <b-dropdown-item href="#">Cursos</b-dropdown-item>
-            <b-dropdown-item href="#">Diretores</b-dropdown-item>
-            <b-dropdown-item href="#">Coordenadores</b-dropdown-item>
-            <b-dropdown-item href="#">Vestibulares</b-dropdown-item>
-            <b-dropdown-item href="#">Disciplinas</b-dropdown-item>
-            <b-dropdown-item href="#">Professores</b-dropdown-item>
-            <b-dropdown-item href="#">Turmas</b-dropdown-item>
-          </b-nav-item-dropdown>
-
-          <b-nav-item-dropdown text="Notas" right>
-            <b-dropdown-item href="#">Lançar Notas</b-dropdown-item>
-            <b-dropdown-item href="#">Visualizar Notas</b-dropdown-item>
-          </b-nav-item-dropdown>
-          
-          <b-nav-item to="/login">Login </b-nav-item>
-          <b-nav-item-dropdown text="Usuário" right>
+          <b-nav-item-dropdown v-if="logado == 'true'" text="Usuário" right>
             <b-dropdown-item href="#">Minha Conta</b-dropdown-item>
-            <b-dropdown-item href="#">Logout</b-dropdown-item>
+            <b-dropdown-item to="/logout">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item v-else to="/login">Login </b-nav-item>
         </b-navbar-nav>
       </b-navbar>
     </div>
@@ -57,6 +57,22 @@
     <router-view />
   </div>
 </template>
+
+<script>
+import VueCookies from "vue-cookies";
+export default {
+  data() {
+    return {
+      logado: VueCookies.get("logado"),
+      token: VueCookies.get("token"),
+      perfil: VueCookies.get("perfil"),
+    };
+  },
+  created(){
+    document.title = "Sistema Acadêmico";
+  }
+};
+</script>
 
 <style lang="scss">
 #app {

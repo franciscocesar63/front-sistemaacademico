@@ -1,22 +1,26 @@
 <template>
   <div class="home">
     <h1>Página Inicial</h1>
+    <h2>Perfil do usuário: {{ this.perfil }}</h2>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import CadastrarCurso from "@/components/CadastrarCurso.vue"; // @ is an alias to /src
+<script>
+import VueCookies from "vue-cookies";
+import router from "@/router";
 
-@Component({
-  components: {
-    CadastrarCurso,
+export default {
+  data() {
+    return {
+      perfil: VueCookies.get("perfil"),
+    };
   },
-  computed: {
-    currentRouteName() {
-      return this.$route.name;
-    },
+  beforeMount() {
+    console.log(VueCookies.get("refresh"));
+    if (VueCookies.get("refresh") == "false") {
+      router.go();
+      VueCookies.set("refresh", "true");
+    }
   },
-})
-export default class Home extends Vue {}
+};
 </script>

@@ -51,18 +51,21 @@ export default {
   methods: {
     onSubmit(event) {
       var token = VueCookies.get("token");
-      console.log(token);
-      var url = "http://localhost:8090/api/cadastrarCurso";
+      // console.log(token);
+      var url = "http://localhost:8090/api/cadastrarCurso/";
 
       axios
         .post(url, this.form, {
           headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU3ByaW5nIEJvb3QgU2lzdGVtYSBBY2FkZW1pY28iLCJzdWIiOiIyIiwiaWF0IjoxNjQxMzM0OTQ2LCJleHAiOjE2NDEzNDM1ODZ9.8WZ_91zt2bSVq8fvUNvf94Eb_i4jG39HzMk35yV4VoE"
+            'Authorization': token,
           },
         })
         .then(function (response) {
           console.log(response);
+          if(response.status==200){
+            alert("Curso cadastrado com Sucesso!")
+          }
+
         })
         .catch(function (error) {
           console.log(error);

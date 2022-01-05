@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Login from '../views/Login.vue';
+import Logout from '../views/Logout.vue';
 import Cadastros from '../views/Cadastros.vue';
 
 Vue.use(VueRouter)
@@ -24,8 +25,13 @@ const routes: Array<RouteConfig> = [
     component: Login
   },
   {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout
+  },
+  {
     path: '/cadastrarCursos',
-    alias: ['/cadastrarDiretores', '/testando2'],
+    alias: ['/cadastrarDiretores', '/cadastrarCoordenadores','/cadastrarProfessores'],
     name: 'Cadastro',
     component: Cadastros
   }
