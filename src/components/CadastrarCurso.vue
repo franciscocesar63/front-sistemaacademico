@@ -37,7 +37,7 @@
 
 <script>
 import axios from "axios";
-
+import VueCookies from "vue-cookies";
 export default {
   data() {
     return {
@@ -50,10 +50,17 @@ export default {
   },
   methods: {
     onSubmit(event) {
-      var url = "http://localhost:8090/api/cadastrarCurso/";
+      var token = VueCookies.get("token");
+      console.log(token);
+      var url = "http://localhost:8090/api/cadastrarCurso";
 
       axios
-        .post(url, this.form)
+        .post(url, this.form, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU3ByaW5nIEJvb3QgU2lzdGVtYSBBY2FkZW1pY28iLCJzdWIiOiIyIiwiaWF0IjoxNjQxMzM0OTQ2LCJleHAiOjE2NDEzNDM1ODZ9.8WZ_91zt2bSVq8fvUNvf94Eb_i4jG39HzMk35yV4VoE"
+          },
+        })
         .then(function (response) {
           console.log(response);
         })

@@ -6,18 +6,20 @@
         <b-form-group id="input-group-1" label="Usuário:" label-for="input-1">
           <b-form-input
             id="input-1"
-            v-model="form.email"
-            type="email"
+            v-model="form.login"
+            type="text"
             placeholder="Digite o seu usuário"
             required
           ></b-form-input>
         </b-form-group>
+
         <label for="text-password">Senha</label>
         <b-form-input
           type="password"
           id="text-password"
           aria-describedby="password-help-block"
           placeholder="Digite a sua senha"
+          v-model="form.senha"
         ></b-form-input>
         <b-button class="mt-5 m-1" type="submit" variant="primary">Login</b-button>
       </b-form>
@@ -26,29 +28,43 @@
 </template>
 
 <script>
+import axios from "axios";
+import VueCookies from "vue-cookies";
 export default {
   data() {
     return {
       form: {
-        email: "",
-        name: "",
-        food: null,
-        checked: [],
+        login: "",
+        senha: "",
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
-      ],
       show: true,
     };
   },
   methods: {
     onSubmit(event) {
+      var url = "http://localhost:8090/auth";
+
+      axios
+        .post(url, this.form)
+        .then(function (response) {
+          var token = response.data.tipo + " " + response.data.token;
+          console.log(token);
+          if (response.status == 200) {
+            alert("Login realizado com sucesso!");
+
+            VueCookies.set("logado", "true");
+            VueCookies.set("token", token);
+          } else {
+            alert(
+              "Ocorreu um erro ao autenticar, tente novamente.\n Erro: " + response.status
+            );
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
       event.preventDefault();
-      alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
