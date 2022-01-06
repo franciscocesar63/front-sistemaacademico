@@ -18,9 +18,9 @@
             <b-dropdown-item v-if="this.perfil=='ADMIN'" to="/cadastrarDiretores">Diretores</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR'" to="/cadastrarCoordenadores">Coordenadores</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR'" href="#">Vestibulares</b-dropdown-item>
-            <b-dropdown-item  v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Disciplinas</b-dropdown-item>
+            <b-dropdown-item  v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" to="/cadastrarDisciplinas">Disciplinas</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN'  || this.perfil=='COORDENADOR'" to="/cadastrarProfessores">Professores</b-dropdown-item>
-            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" href="#">Turmas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" to="/cadastrarTurmas">Turmas</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <b-nav-item-dropdown v-if="this.perfil=='ADMIN' || this.perfil=='COORDENADOR'" text="Associações" right>
@@ -31,7 +31,7 @@
           </b-nav-item-dropdown>
 
           <b-nav-item-dropdown  text="Visualizar" right>
-            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Cursos</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarCursos">Cursos</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Diretores</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Coordenadores</b-dropdown-item>
             <b-dropdown-item href="#">Vestibulares</b-dropdown-item>

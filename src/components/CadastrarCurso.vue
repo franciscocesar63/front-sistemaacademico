@@ -71,7 +71,6 @@ export default {
           console.log(error);
         });
       event.preventDefault();
-      alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
