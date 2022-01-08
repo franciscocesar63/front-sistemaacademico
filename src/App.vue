@@ -32,7 +32,7 @@
 
           <b-nav-item-dropdown  text="Visualizar" right>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarCursos">Cursos</b-dropdown-item>
-            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Diretores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarDiretores">Diretores</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Coordenadores</b-dropdown-item>
             <b-dropdown-item href="#">Vestibulares</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR' || this.perfil=='PROFESSOR'" href="#">Disciplinas</b-dropdown-item>

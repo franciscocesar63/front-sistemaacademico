@@ -200,7 +200,7 @@ export default {
     onSubmit(event) {
       //adicionando telefone à lista.
       this.form.pessoa.telefones.push({ numero: this.numeroTelefone });
-      
+
       var token = VueCookies.get("token");
       var url = "http://localhost:8090/api/cadastrarDiretor/";
 
