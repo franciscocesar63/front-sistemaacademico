@@ -33,10 +33,10 @@
           <b-nav-item-dropdown  text="Visualizar" right>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarCursos">Cursos</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarDiretores">Diretores</b-dropdown-item>
-            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Coordenadores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarCoordenadores">Coordenadores</b-dropdown-item>
             <b-dropdown-item href="#">Vestibulares</b-dropdown-item>
-            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR' || this.perfil=='PROFESSOR'" href="#">Disciplinas</b-dropdown-item>
-            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" href="#">Professores</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR' || this.perfil=='PROFESSOR'" to="/visualizarDisciplinas">Disciplinas</b-dropdown-item>
+            <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR'" to="/visualizarProfessores">Professores</b-dropdown-item>
             <b-dropdown-item v-if="this.perfil=='ADMIN' || this.perfil=='DIRETOR' || this.perfil=='COORDENADOR' || this.perfil=='PROFESSOR'" href="#">Turmas</b-dropdown-item>
           </b-nav-item-dropdown>
 

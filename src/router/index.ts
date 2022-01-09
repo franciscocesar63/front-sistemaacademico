@@ -38,8 +38,8 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/visualizarCursos',
-    alias: ['/visualizarDiretores',],
-    name: 'Cadastro',
+    alias: ['/visualizarDiretores','/visualizarCoordenadores','/visualizarProfessores','/visualizarDisciplinas'],
+    name: 'Visualizar',
     component: Visualizar
   }
 ]

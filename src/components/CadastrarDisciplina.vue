@@ -99,7 +99,7 @@ export default {
     },
   },
   mounted() {
-    var temp = [];
+    var tempCurso = [];
     var token = VueCookies.get("token");
     var url = "http://localhost:8090/api/cursos/";
 
@@ -115,17 +115,17 @@ export default {
             text: valor.nome,
             value: valor.id,
           };
-          temp.push(tempData);
+          tempCurso.push(tempData);
         });
       })
       .catch(function (error) {
         console.log(error);
       });
-    temp.push({
+    tempCurso.push({
       text: "Selecione um Curso",
       value: "",
     });
-    this.cursos = temp;
+    this.cursos = tempCurso;
   },
 };
 </script>
